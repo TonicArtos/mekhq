@@ -937,7 +937,11 @@ test {
 
     minHeapSize = "1024m"
     maxHeapSize = "8192m"
-    jvmArgs = ["-XX:MaxMetaspaceSize=1024m"]
+    jvmArgs = [
+        "-XX:MaxMetaspaceSize=1024m",
+        // Use temp dir for user prefs to isolate them to this task.
+        "-Djava.util.prefs.userRoot=${File.createTempDir()}",
+    ]
 
     testLogging {
         events "failed"
